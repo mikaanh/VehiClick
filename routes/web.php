@@ -17,6 +17,8 @@ Route::get('/rentalkendaraan', function () {
 });
 
 Route::get('/listproduk', [ListProdukController::class, 'show'] );
+Route::post('listproduk', [ListProdukController::class, 'simpan'])->name('produk.simpan');
+
 Route::get('/login', [LoginController::class, 'index']);
 Route::get('/dashboard', [DashboardController::class, 'index']);
 Route::get('/listitem', [ItemListController::class, 'index']);
