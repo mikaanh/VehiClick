@@ -16,8 +16,11 @@ Route::get('/rentalkendaraan', function () {
    return view('image');
 });
 
-Route::get('/listproduk', [ListProdukController::class, 'show'] );
+Route::get('/listproduk', [ListProdukController::class, 'show'])->name('produk.list');
 Route::post('listproduk', [ListProdukController::class, 'simpan'])->name('produk.simpan');
+Route::delete('/produk/{id}', [ListProdukController::class, 'delete'])->name('produk.destroy');
+Route::get('produk/edit/{id}', [ListProdukController::class, 'edit'])->name('produk.edit');
+Route::post('/produk/update/{id}', [ListProdukController::class, 'update'])->name('produk.update');
 
 Route::get('/login', [LoginController::class, 'index']);
 Route::get('/dashboard', [DashboardController::class, 'index']);

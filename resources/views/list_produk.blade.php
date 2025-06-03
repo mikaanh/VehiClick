@@ -54,15 +54,24 @@
                 <th class="px-4 py-2 text-left">Nama Produk</th>
                 <th class="px-4 py-2 text-left">Deskripsi</th>
                 <th class="px-4 py-2 text-right">Harga Produk</th>
+                <th class="px-4 py-2 text-right">Action</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($nama as $index => $item)
-            <tr class="border-b hover:bg-gray-100">
+            @foreach ($produk as $index => $item)
+            <tr>
                 <td class="px-4 py-2">{{ $index + 1 }}</td>
-                <td class="px-4 py-2 font-medium">{{ $item }}</td>
-                <td class="px-4 py-2">{{ $desc[$index] }}</td>
-                <td class="px-4 py-2 text-right">{{ $harga[$index] }}</td>
+                <td class="px-4 py-2">{{ $item->nama }}</td>
+                <td class="px-4 py-2">{{ $item->deskripsi }}</td>
+                <td class="px-4 py-2 text-right">Rp {{ number_format($item->harga, 0, ',', '.') }}</td>
+                <td class="px-4 py-2 text-right">
+                    <a href="{{ route('produk.edit', $item->id) }}" class="text-blue-600 hover:underline mr-2">Edit</a>
+                    <form action="{{ route('produk.destroy', $item->id) }}" method="POST" class="inline" onsubmit="return confirm('Yakin hapus produk ini?')">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="text-red-600 hover:underline">Hapus</button>
+                    </form>
+                </td>
             </tr>
             @endforeach
         </tbody>
